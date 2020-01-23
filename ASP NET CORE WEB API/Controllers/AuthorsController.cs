@@ -15,6 +15,8 @@ namespace ASP_NET_CORE_WEB_API.Controllers
         {
             _courseLibraryRepository = courseLibraryReopository;
         }
+
+        [HttpGet("api/authors")]
         public IActionResult GetAuthors()
         {
             var authorsFromRepo = _courseLibraryRepository.GetAuthors();

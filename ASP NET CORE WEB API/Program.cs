@@ -1,4 +1,4 @@
-using CourseLibrary.API.DbContexts;
+using ASP_NET_CORE_WEB_API.DbContexts;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 
-namespace CourseLibrary.API
+namespace ASP_NET_CORE_WEB_API
 {
     public class Program
     {

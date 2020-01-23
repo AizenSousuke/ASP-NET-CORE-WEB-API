@@ -1,5 +1,5 @@
-using CourseLibrary.API.DbContexts;
-using CourseLibrary.API.Services;
+using ASP_NET_CORE_WEB_API.DbContexts;
+using ASP_NET_CORE_WEB_API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace CourseLibrary.API
+namespace ASP_NET_CORE_WEB_API
 {
     public class Startup
     {
