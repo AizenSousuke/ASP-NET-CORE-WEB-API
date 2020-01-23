@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace CourseLibrary.API.Entities
+namespace ASP_NET_CORE_WEB_API.Entities
 {
     public class Author
     {

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CourseLibrary.API.Entities
+namespace ASP_NET_CORE_WEB_API.Entities
 {
     public class Course
     {

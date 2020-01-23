@@ -1,8 +1,8 @@
-﻿using CourseLibrary.API.Entities;
+﻿using ASP_NET_CORE_WEB_API.Entities;
 using System;
 using System.Collections.Generic;
 
-namespace CourseLibrary.API.Services
+namespace ASP_NET_CORE_WEB_API.Services
 {
     public interface ICourseLibraryRepository
     {    
