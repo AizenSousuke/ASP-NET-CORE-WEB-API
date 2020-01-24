@@ -22,7 +22,12 @@ namespace ASP_NET_CORE_WEB_API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-           services.AddControllers();
+            services.AddControllers(setupAction => 
+            {
+                // To return 406 not acceptable errors if client send !application/json
+                setupAction.ReturnHttpNotAcceptable = true;
+                // Add support for other types using output formatters
+            }).AddXmlDataContractSerializerFormatters();
              
             services.AddScoped<ICourseLibraryRepository, CourseLibraryRepository>();
 
