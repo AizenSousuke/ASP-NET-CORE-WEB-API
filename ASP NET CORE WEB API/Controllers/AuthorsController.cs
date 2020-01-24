@@ -23,7 +23,7 @@ namespace ASP_NET_CORE_WEB_API.Controllers
 
         // Attribute routing
         [HttpGet()]
-        public IActionResult GetAuthors()
+        public ActionResult<IEnumerable<AuthorDto>> GetAuthors()
         {
             var authorsFromRepo = _courseLibraryRepository.GetAuthors();
             var authors = new List<AuthorDto>();

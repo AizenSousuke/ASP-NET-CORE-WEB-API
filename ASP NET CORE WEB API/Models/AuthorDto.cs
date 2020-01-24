@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace ASP_NET_CORE_WEB_API.Models
 {
+    // A copy of Author.cs entity without Courses collection
     public class AuthorDto
     {
         // No need validation attributes because this class doesn't post data
