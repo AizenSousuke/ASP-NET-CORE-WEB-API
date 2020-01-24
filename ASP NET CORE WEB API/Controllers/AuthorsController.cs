@@ -22,5 +22,19 @@ namespace ASP_NET_CORE_WEB_API.Controllers
             var authorsFromRepo = _courseLibraryRepository.GetAuthors();
             return new JsonResult(authorsFromRepo);
         }
+
+        [HttpGet("api/authors/{id}")]
+        public IActionResult GetAuthorById(Guid id) 
+        {
+            var authorFromRepo = _courseLibraryRepository.GetAuthor(id);
+            return new JsonResult(authorFromRepo);
+        }
+
+        // [HttpPost("api/authors")]
+        // public IActionResult AddAuthor()
+        // {
+            
+        //     return new JsonResult();
+        // }
     }
 }
