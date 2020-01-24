@@ -1,4 +1,6 @@
-﻿using ASP_NET_CORE_WEB_API.Services;
+﻿using ASP_NET_CORE_WEB_API.Helpers;
+using ASP_NET_CORE_WEB_API.Models;
+using ASP_NET_CORE_WEB_API.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -24,11 +26,24 @@ namespace ASP_NET_CORE_WEB_API.Controllers
         public IActionResult GetAuthors()
         {
             var authorsFromRepo = _courseLibraryRepository.GetAuthors();
+            var authors = new List<AuthorDto>();
+
+            foreach (var author in authorsFromRepo)
+            {
+                authors.Add(new AuthorDto()
+                {
+                    Id = author.Id,
+                    Name = $"{author.FirstName} {author.LastName}",
+                    MainCategory = author.MainCategory,
+                    Age = author.DateOfBirth.GetCurrentAge()
+                });
+            }
             // Serialize to JSON format
             // return new JsonResult(authorsFromRepo);
             
             // Returns 200 OK response
-            return Ok(authorsFromRepo);
+            // return Ok(authorsFromRepo);
+            return Ok(authors);
         }
 
         // Route will only match if authorId can be casted as a guid
