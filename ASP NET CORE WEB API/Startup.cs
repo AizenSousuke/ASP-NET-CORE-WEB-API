@@ -34,7 +34,7 @@ namespace ASP_NET_CORE_WEB_API
             services.AddDbContext<CourseLibraryContext>(options =>
             {
                 options.UseSqlServer(
-                    @"Server=(localdb)\mssqllocaldb;Database=CourseLibraryDB;Trusted_Connection=True;");
+                    @"Server=(localdb)\MSSQLLocalDB;Database=CourseLibraryDB;Trusted_Connection=True;");
             }); 
         }
 

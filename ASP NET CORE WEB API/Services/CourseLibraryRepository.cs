@@ -84,6 +84,7 @@ namespace ASP_NET_CORE_WEB_API.Services
                 course.Id = Guid.NewGuid();
             }
 
+            Console.WriteLine("Adding author");
             _context.Authors.Add(author);
         }
 

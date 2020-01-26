@@ -1,4 +1,5 @@
-﻿using ASP_NET_CORE_WEB_API.Helpers;
+﻿using ASP_NET_CORE_WEB_API.Entities;
+using ASP_NET_CORE_WEB_API.Helpers;
 using ASP_NET_CORE_WEB_API.Models;
 using ASP_NET_CORE_WEB_API.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -61,11 +62,26 @@ namespace ASP_NET_CORE_WEB_API.Controllers
             // return new JsonResult(authorFromRepo);
         }
 
-        // [HttpPost()]
-        // public IActionResult AddAuthor()
-        // {
-            
-        //     return new JsonResult();
-        // }
+        [HttpPost()]
+        public IActionResult AddAuthor([FromBody]Author author)
+        {
+            Console.WriteLine(author);
+            _courseLibraryRepository.AddAuthor(author);
+            _courseLibraryRepository.Save();
+            var newAuthor = _courseLibraryRepository.GetAuthor(author.Id);
+            return Ok(newAuthor);
+        }
+
+        [HttpDelete("{authorId:guid}")]
+        public IActionResult DeleteAuthor(Guid authorId)
+        {
+            if (_courseLibraryRepository.GetAuthor(authorId) != null)
+            {
+                _courseLibraryRepository.DeleteAuthor(_courseLibraryRepository.GetAuthor(authorId));
+                _courseLibraryRepository.Save();
+                return Ok();
+            }
+            return NotFound();
+        }
     }
 }
