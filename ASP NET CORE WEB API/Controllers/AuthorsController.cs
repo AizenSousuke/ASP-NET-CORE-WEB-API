@@ -2,6 +2,7 @@
 using ASP_NET_CORE_WEB_API.Helpers;
 using ASP_NET_CORE_WEB_API.Models;
 using ASP_NET_CORE_WEB_API.Services;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,10 +17,14 @@ namespace ASP_NET_CORE_WEB_API.Controllers
     public class AuthorsController : ControllerBase
     {
         private readonly ICourseLibraryRepository _courseLibraryRepository;
-        public AuthorsController(ICourseLibraryRepository courseLibraryReopository)
+        private readonly IMapper _mapper;
+
+        public AuthorsController(ICourseLibraryRepository courseLibraryReopository,
+            IMapper mapper)
         {
             // Check if Null
             _courseLibraryRepository = courseLibraryReopository ?? throw new ArgumentNullException(nameof(courseLibraryReopository));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         // Attribute routing
@@ -27,6 +32,9 @@ namespace ASP_NET_CORE_WEB_API.Controllers
         public ActionResult<IEnumerable<AuthorDto>> GetAuthors()
         {
             var authorsFromRepo = _courseLibraryRepository.GetAuthors();
+            // Using mapper to map from authorsFromRepo object properties to destination type IEnumerable<AuthorDto>
+            return Ok(_mapper.Map<IEnumerable<AuthorDto>>(authorsFromRepo));
+            /*
             var authors = new List<AuthorDto>();
 
             foreach (var author in authorsFromRepo)
@@ -39,12 +47,14 @@ namespace ASP_NET_CORE_WEB_API.Controllers
                     Age = author.DateOfBirth.GetCurrentAge()
                 });
             }
+            */
+
             // Serialize to JSON format
             // return new JsonResult(authorsFromRepo);
             
             // Returns 200 OK response
             // return Ok(authorsFromRepo);
-            return Ok(authors);
+            // return Ok(authors);
         }
 
         // Route will only match if authorId can be casted as a guid
