@@ -1,5 +1,6 @@
 using ASP_NET_CORE_WEB_API.DbContexts;
 using ASP_NET_CORE_WEB_API.Services;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace ASP_NET_CORE_WEB_API
 {
@@ -35,7 +37,10 @@ namespace ASP_NET_CORE_WEB_API
             {
                 options.UseSqlServer(
                     @"Server=(localdb)\MSSQLLocalDB;Database=CourseLibraryDB;Trusted_Connection=True;");
-            }); 
+            });
+
+            // Added automapper nuget package to map object to object in Author.cs
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
