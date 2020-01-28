@@ -32,9 +32,10 @@ namespace ASP_NET_CORE_WEB_API.Controllers
         // Like Get but doesn't return a response payload to the client
         [HttpHead]
         public ActionResult<IEnumerable<AuthorDto>> GetAuthors(
-            [FromQuery(Name = "mainCategory")] string mainCategory)
+            [FromQuery(Name = "mainCategory")] string mainCategory,
+            [FromQuery(Name = "searchQuery")] string searchQuery)
         {
-            var authorsFromRepo = _courseLibraryRepository.GetAuthors(mainCategory);
+            var authorsFromRepo = _courseLibraryRepository.GetAuthors(mainCategory, searchQuery);
             if (authorsFromRepo == null)
             {
                 NotFound();
