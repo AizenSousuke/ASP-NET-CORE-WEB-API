@@ -49,6 +49,18 @@ namespace ASP_NET_CORE_WEB_API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            } else
+            {
+                // If not in development environment
+                app.UseExceptionHandler(appBuilder =>
+                {
+                    appBuilder.Run(async context =>
+                    {
+                        context.Response.StatusCode = 500;
+                        await context.Response.WriteAsync("An unexpected fault happened. Try again later.");
+                        // Log error here (outside scope of the course)
+                    });
+                });
             }
 
             app.UseRouting();
