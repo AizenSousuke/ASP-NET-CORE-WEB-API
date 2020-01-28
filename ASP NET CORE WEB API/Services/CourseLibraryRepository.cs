@@ -122,7 +122,19 @@ namespace ASP_NET_CORE_WEB_API.Services
         {
             return _context.Authors.ToList<Author>();
         }
-         
+
+        public IEnumerable<Author> GetAuthors(string mainCategory) 
+        {
+            // Check if mainCategory is filled
+            if (string.IsNullOrWhiteSpace(mainCategory))
+            {
+                return GetAuthors();
+            }
+
+            mainCategory.Trim();
+            return _context.Authors.Where(a => a.MainCategory == mainCategory).ToList<Author>();
+        }
+
         public IEnumerable<Author> GetAuthors(IEnumerable<Guid> authorIds)
         {
             if (authorIds == null)
