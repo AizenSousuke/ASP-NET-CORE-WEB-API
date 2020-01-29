@@ -20,7 +20,8 @@ namespace ASP_NET_CORE_WEB_API.Profiles
                 .ForMember(
                     dest => dest.Age,
                     opt => opt.MapFrom(src => src.DateOfBirth.GetCurrentAge()));
-            ; ;
+
+            CreateMap<Models.AuthorForCreationDto, Entities.Author>();
         }
     }
 }

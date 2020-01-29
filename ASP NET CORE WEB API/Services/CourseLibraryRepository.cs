@@ -1,5 +1,6 @@
 ﻿using ASP_NET_CORE_WEB_API.DbContexts;
 using ASP_NET_CORE_WEB_API.Entities;
+using ASP_NET_CORE_WEB_API.Models;
 using ASP_NET_CORE_WEB_API.ResourceParameters;
 using System;
 using System.Collections.Generic;
@@ -85,7 +86,6 @@ namespace ASP_NET_CORE_WEB_API.Services
                 course.Id = Guid.NewGuid();
             }
 
-            Console.WriteLine("Adding author");
             _context.Authors.Add(author);
         }
 

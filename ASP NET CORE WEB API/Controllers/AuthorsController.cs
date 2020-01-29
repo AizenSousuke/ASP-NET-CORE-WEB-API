@@ -46,7 +46,7 @@ namespace ASP_NET_CORE_WEB_API.Controllers
         }
 
         // Route will only match if authorId can be casted as a guid
-        [HttpGet("{authorId:guid}")]
+        [HttpGet("{authorId:guid}", Name = "GetAuthor")]
         public IActionResult GetAuthor(Guid authorId) 
         {
             var authorFromRepo = _courseLibraryRepository.GetAuthor(authorId);
@@ -61,13 +61,22 @@ namespace ASP_NET_CORE_WEB_API.Controllers
         }
 
         [HttpPost()]
-        public IActionResult AddAuthor([FromBody]Author author)
+        public IActionResult CreateAuthor([FromBody]AuthorForCreationDto author)
         {
-            Console.WriteLine(author);
-            _courseLibraryRepository.AddAuthor(author);
+            if (author == null)
+            {
+                return BadRequest();
+            }
+
+            var authorEntity = _mapper.Map<Entities.Author>(author);
+
+            _courseLibraryRepository.AddAuthor(authorEntity);
             _courseLibraryRepository.Save();
-            var newAuthor = _courseLibraryRepository.GetAuthor(author.Id);
-            return Ok(newAuthor);
+
+            var authorToReturn = _mapper.Map<AuthorDto>(authorEntity);
+
+            // Return the newly created author
+            return CreatedAtRoute("GetAuthor", new { authorId = authorToReturn.Id }, authorToReturn);
         }
 
         [HttpDelete("{authorId:guid}")]
