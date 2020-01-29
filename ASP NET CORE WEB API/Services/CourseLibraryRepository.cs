@@ -1,5 +1,6 @@
 ﻿using ASP_NET_CORE_WEB_API.DbContexts;
-using ASP_NET_CORE_WEB_API.Entities; 
+using ASP_NET_CORE_WEB_API.Entities;
+using ASP_NET_CORE_WEB_API.ResourceParameters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -123,25 +124,32 @@ namespace ASP_NET_CORE_WEB_API.Services
             return _context.Authors.ToList<Author>();
         }
 
-        public IEnumerable<Author> GetAuthors(string mainCategory, string searchQuery) 
+        public IEnumerable<Author> GetAuthors(AuthorsResourceParameters authorsResourceParameters) 
         {
-            // Check if mainCategory is filled
-            if (string.IsNullOrWhiteSpace(mainCategory) && string.IsNullOrWhiteSpace(searchQuery))
+            if (authorsResourceParameters == null)
+            {
+                throw new ArgumentNullException(nameof(authorsResourceParameters));
+            }
+
+            // Check if mainCategory and\or search query is filled
+            if (string.IsNullOrWhiteSpace(authorsResourceParameters.MainCategory) && string.IsNullOrWhiteSpace(authorsResourceParameters.SearchQuery))
             {
                 return GetAuthors();
             }
 
             var collection = _context.Authors as IQueryable<Author>;
 
-            if (!string.IsNullOrWhiteSpace(mainCategory))
+            // Sort collection by mainCategory
+            if (!string.IsNullOrWhiteSpace(authorsResourceParameters.MainCategory))
             {
-                mainCategory = mainCategory.Trim();
+                var mainCategory = authorsResourceParameters.MainCategory.Trim();
                 collection = _context.Authors.Where(a => a.MainCategory == mainCategory);
             }
 
-            if (!string.IsNullOrWhiteSpace(searchQuery))
+            // Further sort collection by searchQuery
+            if (!string.IsNullOrWhiteSpace(authorsResourceParameters.SearchQuery))
             {
-                searchQuery = searchQuery.Trim();
+                var searchQuery = authorsResourceParameters.SearchQuery.Trim();
                 collection = collection.Where(a => a.MainCategory.Contains(searchQuery) ||
                 a.FirstName.Contains(searchQuery) ||
                 a.LastName.Contains(searchQuery));

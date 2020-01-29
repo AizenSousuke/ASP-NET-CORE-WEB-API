@@ -1,4 +1,5 @@
 ﻿using ASP_NET_CORE_WEB_API.Entities;
+using ASP_NET_CORE_WEB_API.ResourceParameters;
 using System;
 using System.Collections.Generic;
 
@@ -12,7 +13,7 @@ namespace ASP_NET_CORE_WEB_API.Services
         void UpdateCourse(Course course);
         void DeleteCourse(Course course);
         IEnumerable<Author> GetAuthors();
-        IEnumerable<Author> GetAuthors(string mainCategory, string searchQuery);
+        IEnumerable<Author> GetAuthors(AuthorsResourceParameters authorsResourceParameters);
         Author GetAuthor(Guid authorId);
         IEnumerable<Author> GetAuthors(IEnumerable<Guid> authorIds);
         void AddAuthor(Author author);

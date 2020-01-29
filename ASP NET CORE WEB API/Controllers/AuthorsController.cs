@@ -1,6 +1,7 @@
 ﻿using ASP_NET_CORE_WEB_API.Entities;
 using ASP_NET_CORE_WEB_API.Helpers;
 using ASP_NET_CORE_WEB_API.Models;
+using ASP_NET_CORE_WEB_API.ResourceParameters;
 using ASP_NET_CORE_WEB_API.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -32,10 +33,10 @@ namespace ASP_NET_CORE_WEB_API.Controllers
         // Like Get but doesn't return a response payload to the client
         [HttpHead]
         public ActionResult<IEnumerable<AuthorDto>> GetAuthors(
-            [FromQuery(Name = "mainCategory")] string mainCategory,
-            [FromQuery(Name = "searchQuery")] string searchQuery)
+            // From query
+            [FromQuery] AuthorsResourceParameters authorsResourceParameters)
         {
-            var authorsFromRepo = _courseLibraryRepository.GetAuthors(mainCategory, searchQuery);
+            var authorsFromRepo = _courseLibraryRepository.GetAuthors(authorsResourceParameters);
             if (authorsFromRepo == null)
             {
                 NotFound();
