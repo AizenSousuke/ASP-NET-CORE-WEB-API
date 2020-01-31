@@ -35,8 +35,10 @@ namespace ASP_NET_CORE_WEB_API
 
             services.AddDbContext<CourseLibraryContext>(options =>
             {
-                options.UseSqlServer(
-                    @"Server=(localdb)\MSSQLLocalDB;Database=CourseLibraryDB;Trusted_Connection=True;");
+                // var connection_local = @"Server=(localdb)\MSSQLLocalDB;Database=CourseLibraryDB;Trusted_Connection=True;";
+                var connection_sql = @"Server=sql,1433\MSSQLLocalDB;Database=CourseLibraryDB;uid=sa;password=P@ssw0rd;";
+
+                options.UseSqlServer(connection_sql);
             });
 
             // Added automapper nuget package to map object to object in Author.cs
