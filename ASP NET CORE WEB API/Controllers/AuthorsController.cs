@@ -76,7 +76,9 @@ namespace ASP_NET_CORE_WEB_API.Controllers
             var authorToReturn = _mapper.Map<AuthorDto>(authorEntity);
 
             // Return the newly created author
-            return CreatedAtRoute("GetAuthor", new { authorId = authorToReturn.Id }, authorToReturn);
+            return CreatedAtRoute("GetAuthor", 
+                new { authorId = authorToReturn.Id }, 
+                authorToReturn);
         }
 
         [HttpDelete("{authorId:guid}")]
