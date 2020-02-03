@@ -35,10 +35,12 @@ namespace ASP_NET_CORE_WEB_API
 
             services.AddDbContext<CourseLibraryContext>(options =>
             {
-                // var connection_local = @"Server=(localdb)\MSSQLLocalDB;Database=CourseLibraryDB;Trusted_Connection=True;";
-                var connection_sql = @"Server=sql,1433\MSSQLLocalDB;Database=CourseLibraryDB;uid=sa;password=P@ssw0rd;";
+                 var connection_local = @"Server=(localdb)\MSSQLLocalDB;Database=CourseLibraryDB;Trusted_Connection=True;";
+                
+                // Docker - sql,1433 is referring to sql server in docker-compose file
+                // var connection_sql = @"Server=sql,1433\MSSQLLocalDB;Database=CourseLibraryDB;uid=sa;password=P@ssw0rd;";
 
-                options.UseSqlServer(connection_sql);
+                options.UseSqlServer(connection_local);
             });
 
             // Added automapper nuget package to map object to object in Author.cs

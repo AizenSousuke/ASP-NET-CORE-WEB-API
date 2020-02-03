@@ -60,7 +60,7 @@ namespace ASP_NET_CORE_WEB_API.Controllers
             return Ok(_mapper.Map<AuthorDto>(authorFromRepo));
         }
 
-        [HttpPost()]
+        [HttpPost]
         public IActionResult CreateAuthor([FromBody]AuthorForCreationDto author)
         {
             if (author == null)

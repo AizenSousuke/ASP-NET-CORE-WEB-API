@@ -131,6 +131,8 @@ namespace ASP_NET_CORE_WEB_API.Services
                 throw new ArgumentNullException(nameof(authorsResourceParameters));
             }
 
+            // Deferred execution part of the tutorial
+
             // Check if mainCategory and\or search query is filled
             if (string.IsNullOrWhiteSpace(authorsResourceParameters.MainCategory) && string.IsNullOrWhiteSpace(authorsResourceParameters.SearchQuery))
             {
